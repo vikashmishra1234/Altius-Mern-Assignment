@@ -13,6 +13,7 @@ const GetTickets = ({setNumberOfTickets,list}) => {
   useEffect(() => {
     const getData = async () => {
       const data = await getAllTickets();
+      console.log(data)
       setNumberOfTickets(data.tickets.length)
       setTickets(data.tickets);
     };
@@ -26,6 +27,7 @@ const GetTickets = ({setNumberOfTickets,list}) => {
      }
     }
   };
+  console.log(tickets)
   const handleChange = async(e,ticketId)=>{
     const status = e.target.value
     const res = await updateTicketStatus({status,ticketId})

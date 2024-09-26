@@ -34,7 +34,7 @@ const Agent = () => {
              </div>
              <div>
                 <h2 className='text-2xl'>List of all tickets created by customer</h2>
-                <GetTickets setNumberOfTickets={setNumberOfTickets}/>
+                <GetTickets list={100} setNumberOfTickets={setNumberOfTickets}/>
              </div>
             </div>
     </div>

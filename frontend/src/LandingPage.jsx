@@ -18,7 +18,7 @@ const LandingPage = () => {
             to="/register-customer"
             className="bg-white text-blue-500 py-3 px-6 rounded-full text-lg font-semibold shadow-lg hover:bg-blue-100 transition"
           >
-            Register as Customer
+            Continue as Customer
           </Link>
 
           {/* Register as Agent */}
@@ -26,7 +26,7 @@ const LandingPage = () => {
             to="/register-agent"
             className="bg-white text-green-500 py-3 px-6 rounded-full text-lg font-semibold shadow-lg hover:bg-green-100 transition"
           >
-            Register as Agent
+            Continue as Agent
           </Link>
 
           {/* Register as Admin */}
@@ -34,18 +34,18 @@ const LandingPage = () => {
             to="/register-admin"
             className="bg-white text-red-500 py-3 px-6 rounded-full text-lg font-semibold shadow-lg hover:bg-red-100 transition"
           >
-            Register as Admin
+            Continue as Admin
           </Link>
         </div>
 
         {/* Login link */}
         <div className="mt-10">
-          <Link
+          {/* <Link
             to="/login"
             className="text-white text-lg underline hover:text-gray-200 transition"
           >
             Already have an account? Login
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>

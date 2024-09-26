@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 
 const RegisterUser = () => {
   const Navigate = useNavigate();
+  const [loading,setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,10 +24,12 @@ const RegisterUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true)
       const res = await axios.post(
         "http://localhost:5000/register-user",
         formData
       );
+      setLoading(false)
       if (res.data.success) {
         Swal.fire({
           icon: "success",
@@ -137,7 +140,7 @@ const RegisterUser = () => {
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded-md shadow hover:bg-blue-600 transition"
           >
-            Register
+            {loading?"Loading Please wait...":"Register"}
           </button>
         </form>
       </div>
