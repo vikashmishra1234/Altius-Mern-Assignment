@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from '../Sidebar';
 import { Link, useLocation } from 'react-router-dom';
 import GetTickets from './GetTickets';
+import userImage from '../assets/user.png'
 
 const Coustomer = () => {
     const [user, setUser] = useState(null); 
@@ -30,7 +31,7 @@ const Coustomer = () => {
                 {user ? (
                     <div className='flex mb-10 gap-8 items-center'>
                         <div>
-                            <img className='w-[95%]'  src="/src/assets/user.png" alt="user.png" />
+                            <img className='w-[95%]'  src={userImage} alt="user.png" />
                         </div>
                         <div className='flex flex-col text-xl'>
                             <span className='mt-2'>{user.name}</span>

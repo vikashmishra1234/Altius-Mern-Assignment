@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAllAgents,deleteCustomer } from "../utills";
 import Sidebar from "../Sidebar";
 import { Link } from "react-router-dom";
+import user from '../assets/user.png'
 
 const AllAgents = () => {
   const [customer, setCustomers] = useState([]);
@@ -28,7 +29,7 @@ const AllAgents = () => {
                customer?.map((item,ind)=>(
                 <div className='flex  mb-10 border-b gap-8 items-center'>
                 <div>
-                    <img className='w-[85%]'  src="/src/assets/user.png" alt="user.png" />
+                    <img className='w-[85%]'  src={user} alt="user.png" />
                 </div>
                 <div className='flex flex-col text-xl'>
                     <span className='mt-2'>{item.name}</span>
