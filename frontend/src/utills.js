@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 
 export const addNote = async(data)=>{
     try {
-        const response = await axios.post('http://localhost:5000/add-note', data, {
+        const response = await axios.post('https://altius-mern-assignment.onrender.com/add-note', data, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${sessionStorage.getItem('userToken')}`, // Assuming you store the JWT in session storage
@@ -25,7 +25,7 @@ export const addNote = async(data)=>{
 }
 export const postTicket = async(ticketData)=>{
     try {
-        const response = await axios.post('http://localhost:5000/create-ticket', ticketData, {
+        const response = await axios.post('https://altius-mern-assignment.onrender.com/create-ticket', ticketData, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${sessionStorage.getItem('userToken')}`, // Assuming you store the JWT in session storage
@@ -44,7 +44,7 @@ export const postTicket = async(ticketData)=>{
 }
 export const getCustomberTickets = async()=>{
     try {
-        const response = await axios.get('http://localhost:5000/get-tickets', {
+        const response = await axios.get('https://altius-mern-assignment.onrender.com/get-tickets', {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${sessionStorage.getItem('userToken')}`, // Assuming you store the JWT in session storage
@@ -64,7 +64,7 @@ export const getCustomberTickets = async()=>{
 }
 export const getAllTickets = async()=>{
     try {
-        const response = await axios.get('http://localhost:5000/getall-tickets', {
+        const response = await axios.get('https://altius-mern-assignment.onrender.com/getall-tickets', {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${sessionStorage.getItem('userToken')}`, // Assuming you store the JWT in session storage
@@ -86,7 +86,7 @@ export const getAllTickets = async()=>{
 export const deleteCustomer = async(id)=>{
     const data = {}
     try {
-        const response = await axios.post(`http://localhost:5000/delete-customer/?id=${id}`,data, {
+        const response = await axios.post(`https://altius-mern-assignment.onrender.com/delete-customer/?id=${id}`,data, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${sessionStorage.getItem('userToken')}`, 
@@ -112,7 +112,7 @@ export const deleteCustomer = async(id)=>{
 }
 export const updateTicketStatus = async(data)=>{
     try {
-        const response = await axios.post('http://localhost:5000/update-tickets',data, {
+        const response = await axios.post('https://altius-mern-assignment.onrender.com/update-tickets',data, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${sessionStorage.getItem('userToken')}`, 
@@ -133,7 +133,7 @@ export const updateTicketStatus = async(data)=>{
 }
 export const getAllCustomers = async(data)=>{
     try {
-        const response = await axios.get('http://localhost:5000/get-customer', {
+        const response = await axios.get('https://altius-mern-assignment.onrender.com/get-customer', {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${sessionStorage.getItem('userToken')}`, 
@@ -154,7 +154,7 @@ export const getAllCustomers = async(data)=>{
 }
 export const getAllAgents = async()=>{
     try {
-        const response = await axios.get('http://localhost:5000/get-agents', {
+        const response = await axios.get('https://altius-mern-assignment.onrender.com/get-agents', {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${sessionStorage.getItem('userToken')}`, 

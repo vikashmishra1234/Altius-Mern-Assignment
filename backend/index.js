@@ -10,7 +10,7 @@ const app = express();
 const PORT = 5000;
 
 app.use(cors({
-  origin:['http://localhost:5173','https://colleges-notes-websites.vercel.app'],
+  origin:['http://localhost:5173','https://altius-mern-assignment.vercel.app'],
   methods:["POST","GET","PUT"],
   credentials:true,
   optionsSuccessStatus: 200,
