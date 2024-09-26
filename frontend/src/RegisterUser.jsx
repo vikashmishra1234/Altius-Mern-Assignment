@@ -26,7 +26,7 @@ const RegisterUser = () => {
     try {
       setLoading(true)
       const res = await axios.post(
-        "http://localhost:5000/register-user",
+        "https://altius-mern-assignment.onrender.com/register-user",
         formData
       );
       setLoading(false)
