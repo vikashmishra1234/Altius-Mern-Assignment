@@ -82,7 +82,6 @@ const TicketComponent = ({ ind, item, role, setLoader, setChange }) => {
                 <div>
                     {showReply && selectedIndex === ind && item.notes?.map((data) => (
                         <React.Fragment key={data._id}>
-                            <h2 className="text-xl mt-2 font-bold text-gray-500 mb-2">Some replies to this ticket</h2>
                             <div className="border flex items-center justify-between border-b-gray-300">
                                 <div>
                                     <p className="text-gray-500 text-lg">Reply: {data.text}</p>
@@ -90,8 +89,8 @@ const TicketComponent = ({ ind, item, role, setLoader, setChange }) => {
                                     <p className="text-lg">Date: {data.createdAt.split("T")[0]} at {data.createdAt.split("T")[1].split("+")[0]}</p>
                                 </div>
                                 <div>
-                                    <MdDelete size={'27px'} onClick={() => {
-                                        deleteReply({ ticketId: item._id, noteId: data._id });
+                                    <MdDelete size={'27px'} onClick={async() => {
+                                        await deleteReply({ ticketId: item._id, noteId: data._id });
                                         setChange((prevChange) => !prevChange);
                                     }} cursor={'pointer'} />
                                 </div>
