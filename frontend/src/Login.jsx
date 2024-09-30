@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { loginUser } from './utills';
+import { useNavigate } from 'react-router-dom';
+import ContextProvider from './Context/ContextProvider';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-
+  const [loading,setLoading] = useState(false)
+  const Navigate = useNavigate();
+  const {setUser} = useContext(ContextProvider)
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -15,28 +19,23 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        // Store the token in local storage or context for later use
-        localStorage.setItem('token', data.token);
-        // Redirect to dashboard or home page
-        window.location.href = '/dashboard'; // Change this to your desired path
-      } else {
-        const errorData = await response.json();
-        setErrorMessage(errorData.message || 'Login failed. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error logging in:', error);
-      setErrorMessage('An error occurred. Please try again later.');
+    setLoading(true)
+    const res = await loginUser({email,password});
+    setLoading(false)
+    if(res&&res.data.user.role=='customer'){
+      setUser(res.data.user)
+      sessionStorage.setItem("userToken",res.data.user.token)
+      Navigate(`/coustomer-dashboard`);
+    }
+    else if(res&&res.data.user.role=='agent'){
+      setUser(res.data.user)
+      sessionStorage.setItem("userToken",res.data.user.token)
+      Navigate(`/agent-dashboard`);
+    }
+    else if(res){
+      setUser(res.data.user)
+      sessionStorage.setItem("userToken",res.data.user.token)
+      Navigate(`/admin-dashboard`);
     }
   };
 
@@ -44,7 +43,6 @@ const Login = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-6 rounded shadow-md w-96">
         <h2 className="text-lg font-bold mb-4 text-center">Login</h2>
-        {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-gray-700">Email</label>
@@ -72,7 +70,9 @@ const Login = () => {
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded shadow hover:bg-blue-600 transition"
           >
-            Login
+            {
+              loading?'loading please wait...':'login'
+            }
           </button>
         </form>
       </div>

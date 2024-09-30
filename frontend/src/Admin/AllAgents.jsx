@@ -27,7 +27,7 @@ const AllAgents = () => {
             <h2 className="text-2xl mb-5">list of all customer service agent</h2>
             {
                customer?.map((item,ind)=>(
-                <div className='flex  mb-10 border-b gap-8 items-center'>
+                <div key={ind} className='flex  mb-10 border-b gap-8 items-center'>
                 <div>
                     <img className='w-[85%]'  src={user} alt="user.png" />
                 </div>

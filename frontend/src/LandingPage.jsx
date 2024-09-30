@@ -15,7 +15,7 @@ const LandingPage = () => {
         <div className="flex flex-col gap-5 md:flex-row justify-center space-x-4">
           {/* Register as Customer */}
           <Link
-            to="/register-customer"
+            to="/register/?role=customer"
             className="bg-white text-blue-500 py-3 px-6 rounded-full text-lg font-semibold shadow-lg hover:bg-blue-100 transition"
           >
             Continue as Customer
@@ -23,7 +23,7 @@ const LandingPage = () => {
 
           {/* Register as Agent */}
           <Link
-            to="/register-agent"
+            to="/register/?role=agent"
             className="bg-white text-green-500 py-3 px-6 rounded-full text-lg font-semibold shadow-lg hover:bg-green-100 transition"
           >
             Continue as Agent
@@ -31,7 +31,7 @@ const LandingPage = () => {
 
           {/* Register as Admin */}
           <Link
-            to="/register-admin"
+            to="/register/?role=admin"
             className="bg-white text-red-500 py-3 px-6 rounded-full text-lg font-semibold shadow-lg hover:bg-red-100 transition"
           >
             Continue as Admin
@@ -40,12 +40,12 @@ const LandingPage = () => {
 
         {/* Login link */}
         <div className="mt-10">
-          {/* <Link
+          <Link
             to="/login"
             className="text-white text-lg underline hover:text-gray-200 transition"
           >
             Already have an account? Login
-          </Link> */}
+          </Link>
         </div>
       </div>
     </div>

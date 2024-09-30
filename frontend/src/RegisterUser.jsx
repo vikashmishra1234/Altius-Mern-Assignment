@@ -1,17 +1,28 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import React, { useContext, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { registerUser } from "./utills";
+import ContextProvider from "./Context/ContextProvider";
 
 const RegisterUser = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const getRole = queryParams.get("role");
   const Navigate = useNavigate();
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [role, setRole] = useState(getRole);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-    role: "customer",
+    role: role,
   });
+  const { setUser } = useContext(ContextProvider);
+
+  useEffect(() => {
+    if (!role) {
+      Navigate("/");
+    }
+  }, [role]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,41 +34,21 @@ const RegisterUser = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      setLoading(true)
-      const res = await axios.post(
-        "http://localhost:5000/register-user",
-        formData
-      );
-      setLoading(false)
-      if (res.data.success) {
-        Swal.fire({
-          icon: "success",
-          title: "Success",
-          text: "Successfully Registered",
-        });
-        sessionStorage.setItem("userToken", res.data.token);
-
-        const userObject = res.data.user;
-        const userString = encodeURIComponent(JSON.stringify(userObject));
-        if(userObject.role=='customer'){
-
-          Navigate(`/coustomer-dashboard/?user=${userString}`);
-        }
-        else if(userObject.role=='agent'){
-          Navigate(`/agent-dashboard/?user=${userString}`);
-        }
-        else{
-          Navigate(`/admin-dashboard/?user=${userString}`);
-        }
-      }
-    } catch (error) {
-      console.error("Error registering user:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Registration Failed",
-        text: "There was an error during registration. Please try again.",
-      });
+    setLoading(true);
+    const res = await registerUser(formData);
+    setLoading(false);
+    if (res && res.data.user.role == "customer") {
+      setUser(res.data.user);
+      sessionStorage.setItem("userToken", res.data.user.token);
+      Navigate(`/coustomer-dashboard`);
+    } else if (res && res.data.user.role == "agent") {
+      setUser(res.data.user);
+      sessionStorage.setItem("userToken", res.data.user.token);
+      Navigate(`/agent-dashboard`);
+    } else if (res) {
+      setUser(res.data.user);
+      sessionStorage.setItem("userToken", res.data.user.token);
+      Navigate(`/admin-dashboard`);
     }
   };
 
@@ -69,7 +60,6 @@ const RegisterUser = () => {
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Name Input */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Full Name
@@ -85,7 +75,6 @@ const RegisterUser = () => {
             />
           </div>
 
-          {/* Email Input */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Email Address
@@ -100,11 +89,9 @@ const RegisterUser = () => {
               required
             />
           </div>
-
-          {/* Password Input */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              Password
+              Set Password
             </label>
             <input
               type="password"
@@ -117,30 +104,25 @@ const RegisterUser = () => {
             />
           </div>
 
-          {/* Role Input */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Role
             </label>
             <select
               name="role"
-              value={formData.role}
-              onChange={handleInputChange}
+              defaultValue={role}
               className="w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             >
-              <option value="customer">Customer</option>
-              <option value="agent">Agent</option>
-              <option value="admin">Admin</option>
+              <option value={role}>{role}</option>
             </select>
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded-md shadow hover:bg-blue-600 transition"
           >
-            {loading?"Loading Please wait...":"Register"}
+            {loading ? "Loading Please wait..." : "Register"}
           </button>
         </form>
       </div>

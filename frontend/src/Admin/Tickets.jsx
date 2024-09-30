@@ -1,12 +1,18 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import GetTickets from '../serviceagent/AllTickets'
 import Sidebar from '../Sidebar'
+import ContextProvider from '../Context/ContextProvider';
+import { useNavigate } from 'react-router-dom';
 
 const Tickets = () => {
-    const [nu,setNumberOfTickets] = useState(0)
+    const [numberOfTickets,setNumberOfTickets] = useState(0);
+    const {user} = useContext(ContextProvider);
+
+ 
+
   return (
     <div className='flex'>
-        <Sidebar role='admin'/>
+        <Sidebar role={user?.role}/>
         <div className='w-fit m-auto '>
 
         <GetTickets list={100} setNumberOfTickets={setNumberOfTickets}/>

@@ -18,7 +18,11 @@ const CreateTicket = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    postTicket(ticketData)
+    const res = await postTicket(ticketData);
+    if(res){
+      setTicketData({title: '',
+        description: '',})
+    }
   };
 
   return (

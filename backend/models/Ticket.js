@@ -28,11 +28,11 @@ const ticketSchema = new mongoose.Schema({
       text: String,
       createdBy: {
         type: String,
-        ref: 'User', // Reference to the User model
+        ref: 'User', 
       },
       createdAt: {
-        type: Date,
-        default: Date.now,
+        type: String,
+        default: "",
       },
     },
   ],

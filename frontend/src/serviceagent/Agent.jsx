@@ -1,27 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Sidebar from '../Sidebar'
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import GetTickets from './AllTickets';
+import ContextProvider from '../Context/ContextProvider';
 
 const Agent = () => {
-    const [user, setUser] = useState(null); 
     const [role,setRole] = useState('')
     const [numberOfTickets,setNumberOfTickets] = useState(0)
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
-    const userParam = queryParams.get('user');
-
+    const {user} = useContext(ContextProvider);
+    const Navigate = useNavigate();
     useEffect(() => {
-        if (userParam) {
-            try {
-                const userData = JSON.parse(decodeURIComponent(userParam));
-                setRole(userData.role)
-                setUser(userData); 
-            } catch (error) {
-                console.error("Failed to parse user:", error);
-            }
+        if(user&&user.role!='agent'){
+            Navigate('/login')
         }
-    }, [userParam]);
+        if (user) {
+            setRole(user.role)
+        }
+    }, [user]);
   return (
     <div className='flex'>
         <Sidebar role={role}/>
@@ -33,8 +28,8 @@ const Agent = () => {
                 Total Tickets: {numberOfTickets}
              </div>
              <div>
-                <h2 className='text-2xl'>List of all tickets created by customer</h2>
-                <GetTickets list={100} setNumberOfTickets={setNumberOfTickets}/>
+                <h2 className='text-2xl'>Recent tickets created by customer</h2>
+                <GetTickets list={3} setNumberOfTickets={setNumberOfTickets}/>
              </div>
             </div>
     </div>

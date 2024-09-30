@@ -18,16 +18,12 @@ const App = () => {
     <div >
       <BrowserRouter>
       <Routes>
-        {/* Landing Page Route */}
         <Route path="/" element={<LandingPage />} />
 
-        {/* Registration Routes */}
-        <Route path="/register-customer" element={<RegisterUser />} />
-        <Route path="/register-agent" element={<RegisterUser />} />
-        <Route path="/register-admin" element={<RegisterUser />} />
-        <Route path='/coustomer-dashboard' element={<Coustomer/>}/>
+        <Route path="/register" element={<RegisterUser  />} />
         <Route path='/create-ticket' element={<CreateTicket/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/coustomer-dashboard' element={<Coustomer/>}/>
         <Route path='/agent-dashboard' element={<Agent/>}/>
         <Route path='/admin-dashboard' element={<Admin/>}/>
         <Route path='/tickets' element={<Tickets/>}/>
