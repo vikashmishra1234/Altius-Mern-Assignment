@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllCustomers, deleteCustomer } from "../utills";
 import Sidebar from "../Sidebar";
-import { Link } from "react-router-dom";
-
+import userImage from '../assets/user.png'
 const Customer = () => {
   const [customer, setCustomers] = useState([]);
   const [change, setChange] = useState(false);
@@ -36,7 +35,7 @@ const Customer = () => {
               <div>
                 <img
                   className="w-[85%]"
-                  src="/src/assets/user.png"
+                  src={userImage}
                   alt="user.png"
                 />
               </div>
