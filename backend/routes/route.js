@@ -1,5 +1,5 @@
 const express = require('express');
-const { RegisterUser, loginUser } = require('../controller/RegisterUser');
+const { RegisterUser, loginUser, getUser } = require('../controller/RegisterUser');
 const { authenticate } = require('../verifyAuth');
 const { createTicket } = require('../controller/createTicket');
 const { getCustomerTickets, getAllTickets } = require('../controller/getCustomerTicket');
@@ -22,5 +22,6 @@ Router.get('/get-tickets',authenticate,getCustomerTickets);
 Router.get('/get-customer',authenticate,getCustomer);
 Router.get('/get-agents',authenticate,getAgents);
 Router.get('/getall-tickets',authenticate,getAllTickets);
+Router.get('/get-user',authenticate,getUser)
 
 module.exports = Router;

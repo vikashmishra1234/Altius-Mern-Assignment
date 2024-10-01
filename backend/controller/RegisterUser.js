@@ -64,4 +64,23 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { RegisterUser, loginUser };
+const getUser = async(req,res)=>{
+  try {
+    const userId = req.user.userId;
+    const user = await User.findOne({_id:userId});
+    if(!user){
+      return res.status(404).json({
+        error:"User Not Found"
+      })
+    }
+    return res.status(200).json({
+      user,
+      success:true
+    })
+  } catch (error) {
+    console.log(error.message)
+    res.status(500).json({ error: 'Server error. Please try again later.', success: false });
+  }
+}
+
+module.exports = { RegisterUser, loginUser, getUser };

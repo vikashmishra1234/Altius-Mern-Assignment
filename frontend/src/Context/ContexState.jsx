@@ -3,7 +3,7 @@ import ContextProvider from './ContextProvider.jsx';
 
 
 const ContextState = (props) => {
-const [user,setUser] = useState();
+const [user,setUser] = useState(null);
   return (
     <ContextProvider.Provider value={{user,setUser}} >
         {props.children}

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { loginUser } from './utills';
 import { useNavigate } from 'react-router-dom';
 import ContextProvider from './Context/ContextProvider';
@@ -12,7 +12,7 @@ const Login = () => {
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
-
+ 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
@@ -25,7 +25,7 @@ const Login = () => {
     if(res&&res.data.user.role=='customer'){
       setUser(res.data.user)
       sessionStorage.setItem("userToken",res.data.user.token)
-      Navigate(`/coustomer-dashboard`);
+      Navigate(`/customer-dashboard`);
     }
     else if(res&&res.data.user.role=='agent'){
       setUser(res.data.user)

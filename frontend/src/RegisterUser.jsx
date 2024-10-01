@@ -40,7 +40,7 @@ const RegisterUser = () => {
     if (res && res.data.user.role == "customer") {
       setUser(res.data.user);
       sessionStorage.setItem("userToken", res.data.user.token);
-      Navigate(`/coustomer-dashboard`);
+      Navigate(`/customer-dashboard`);
     } else if (res && res.data.user.role == "agent") {
       setUser(res.data.user);
       sessionStorage.setItem("userToken", res.data.user.token);
